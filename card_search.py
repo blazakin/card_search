@@ -9,6 +9,7 @@ socket.bind("tcp://*:5553")
 while True:
     message = socket.recv().decode()
 
+    print(f"Received: {message}")
     if message == 'Exit':
         break
 
@@ -18,7 +19,9 @@ while True:
     for card in card_list:
         if search_term in card:
             socket.send_string(card)
+            print(f"Sent: {card}")
             found = True
             break
     if not found:
         socket.send_string("Card not found.")
+        print(f"Sent: Card not found.")
